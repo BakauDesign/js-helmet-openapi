@@ -587,7 +587,7 @@
         }
       }
     },
-    "/article/{name}": {
+    "/article/{title}": {
       "patch": {
         "tags": ["articles"],
         "description": "Edit existing article and updating into the system",
