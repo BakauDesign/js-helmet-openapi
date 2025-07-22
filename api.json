@@ -1,0 +1,975 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "version": "1.0.0",
+    "title": "JS Helmet",
+    "description": "A sample API that uses a js-helmet as an example to demonstrate features in the OpenAPI 3.0 specification",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "name": "JS Helmet API Team",
+      "email": "apiteam@swagger.io",
+      "url": "http://swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.jshelmet.com/v1"
+    }
+  ],
+  "paths": {
+    "/user/login": {
+      "post": {
+        "tags": ["user"],
+        "description": "Generate jwt token if username and password valid",
+        "operationId": "login user",
+        "requestBody": {
+          "description": "Valid username and password used to login",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "login response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "example": {
+                  "success": true,
+                  "message": "Login success",
+                  "data": {
+                    "fullname": "",
+                    "avatar": "uAxtrz0dbY7ZoU41h9Njd4RkJsPSbghpDX6yfrrT.png",
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "success": false,
+                  "message": "Login failed"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products": {
+      "post": {
+        "tags": ["products"],
+        "description": "Create new product and insert into the system",
+        "operationId": "createProduct",
+        "requestBody": {
+          "description": "Added product in database",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
+              },
+              "example": {
+                "name": "Earbuds Nirkabel Ultra Bass",
+                "description": "Earbuds nirkabel dengan kualitas suara bass yang mendalam dan jernih, koneksi stabil Bluetooth 5.2, tahan air IPX7, serta daya tahan baterai hingga 8 jam.",
+                "type": "Elektronik",
+                "color_variant": "Putih Gading",
+                "size": "One Size",
+                "shopee_link": "https://shopee.co.id/earbuds-ultrabass-putih",
+                "is_active": true,
+                "highlighted": false,
+                "cover": {
+                  "name": "earbuds-putih-box.png",
+                  "lastModified": 1702234567000,
+                  "size": 280000,
+                  "type": "image/png"
+                },
+                "gallery": [
+                  {
+                    "name": "earbuds-putih-digunakan.jpg",
+                    "lastModified": 1702234568000,
+                    "size": 310000,
+                    "type": "image/jpeg"
+                  },
+                  {
+                    "name": "earbuds-putih-charging-case.jpg",
+                    "lastModified": 1702234569000,
+                    "size": 190000,
+                    "type": "image/jpeg"
+                  },
+                  {
+                    "name": "earbuds-putih-spesifikasi.pdf",
+                    "lastModified": 1702234570000,
+                    "size": 50000,
+                    "type": "application/pdf"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "create product response",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "message": "Product successfully created"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["products"],
+        "description": "Get products",
+        "operationId": "getProduct",
+        "requestBody": {
+          "description": "Filtered product in database",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
+              },
+              "example": {
+                "is_active": true,
+                "highlighted": true
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "product response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                },
+                "example": {
+                  "success": true,
+                  "message": "Product successfully fetched",
+                  "data": [{
+                    "name": "JS CARBON-X FULL FACE",
+                    "type": "Full Face",
+                    "cover": {
+                      "name": "carbon_cover.jpg",
+                      "lastModified": 1678886400000,
+                      "size": 500000,
+                      "type": "image/jpeg"
+                    },
+                  "gallery": [
+                    {
+                      "name": "carbon_gallery_1.jpg",
+                      "lastModified": 1678886400000,
+                      "size": 300000,
+                      "type": "image/jpeg"
+                    },
+                    {
+                      "name": "carbon_gallery_2.jpg",
+                      "lastModified": 1678886400000,
+                      "size": 450000,
+                      "type": "image/jpeg"
+                    }
+                  ],
+                    "description": "Helm racing carbon fiber ultra-ringan (1.250g). Visor racing-grade dan sertifikasi FIM.",
+                    "color_variant": "Full Carbon",
+                    "size": "L",
+                    "shopee_link": "https://shopee.co.id/jscarbonx",
+                    "is_active": true,
+                    "highlighted": true
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "product not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "message": "Product not found",
+                  "data": []
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "success": false,
+                  "message": "There's an error in server",
+                  "data": []
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/{name}": {
+      "patch": {
+        "tags": ["products"],
+        "description": "Edit existing product and updating into the system",
+        "operationId": "createProduct",
+        "requestBody": {
+          "description": "Edited product",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
+              },
+              "example": {
+                "name": "Earbuds Nirkabel Ultra Bass",
+                "description": "Earbuds nirkabel dengan kualitas suara bass yang mendalam dan jernih, koneksi stabil Bluetooth 5.2, tahan air IPX7, serta daya tahan baterai hingga 8 jam.",
+                "type": "Elektronik",
+                "color_variant": "Putih Gading",
+                "size": "One Size",
+                "shopee_link": "https://shopee.co.id/earbuds-ultrabass-putih",
+                "is_active": true,
+                "highlighted": false,
+                "cover": {
+                  "name": "earbuds-putih-box.png",
+                  "lastModified": 1702234567000,
+                  "size": 280000,
+                  "type": "image/png"
+                },
+                "gallery": [
+                  {
+                    "name": "earbuds-putih-digunakan.jpg",
+                    "lastModified": 1702234568000,
+                    "size": 310000,
+                    "type": "image/jpeg"
+                  },
+                  {
+                    "name": "earbuds-putih-charging-case.jpg",
+                    "lastModified": 1702234569000,
+                    "size": 190000,
+                    "type": "image/jpeg"
+                  },
+                  {
+                    "name": "earbuds-putih-spesifikasi.pdf",
+                    "lastModified": 1702234570000,
+                    "size": 50000,
+                    "type": "application/pdf"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "create product response",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "message": "Product successfully created"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["products"],
+        "description": "Get product by name",
+        "operationId": "getProduct",
+        "responses": {
+          "200": {
+            "description": "product response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                },
+                "example": {
+                  "success": true,
+                  "message": "Product successfully fetched",
+                  "data": {
+                    "name": "JS CARBON-X FULL FACE",
+                    "type": "Full Face",
+                    "cover": {
+                      "name": "carbon_cover.jpg"
+                    },
+                  "gallery": [
+                    {
+                      "name": "carbon_gallery_1.jpg"
+                    },
+                    {
+                      "name": "carbon_gallery_2.jpg"
+                    }
+                  ],
+                    "description": "Helm racing carbon fiber ultra-ringan (1.250g). Visor racing-grade dan sertifikasi FIM.",
+                    "color_variant": "Full Carbon",
+                    "size": "L",
+                    "shopee_link": "https://shopee.co.id/jscarbonx",
+                    "is_active": true,
+                    "highlighted": true
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "product not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "message": "Product not found",
+                  "data": {}
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "success": false,
+                  "message": "There's an error in server",
+                  "data": {}
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["products"],
+        "description": "Delete product by name",
+        "operationId": "deleteProduct",
+        "responses": {
+          "204": {
+            "description": "product response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                },
+                "example": {
+                  "success": true,
+                  "message": "Product successfully deleted"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "product not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "message": "Product not found",
+                  "data": {}
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "success": false,
+                  "message": "There's an error in server",
+                  "data": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/articles": {
+      "post": {
+        "tags": ["articles"],
+        "description": "Create new article and insert into the system",
+        "operationId": "createArticle",
+        "requestBody": {
+          "description": "Added article in database",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Article Write"
+              },
+              "example": {
+                "title": "Tour Lebih Aman Dengan Helm Full Face Yang Tepat!",
+                "subtitle": "5 Kriteria Utama yang Harus Dipertimbangkan Sebelum Membeli Helm untuk Perjalanan Jarak Jauh",
+                "content": "{\ntime: 1753183777114,\nblocks: [\n{\nid: \"mhTl6ghSkV\",\ntype: \"paragraph\",\ndata: {\ntext: \"Hey. Meet the new Editor. On this picture you can see it in action. Then, try a demo 🤓\",\n} ,\n} \n] \n}\n",
+                "category": "Tips Berkendara Aman",
+                "is_active": true,
+                "highlighted": true,
+                "cover": {
+                  "name": "carbon_cover.jpg",
+                  "lastModified": 1678886400000,
+                  "size": 500000,
+                  "type": "image/jpeg"
+                },
+                "images": [
+                  {
+                    "name": "carbon_gallery_1.jpg",
+                    "lastModified": 1678886400000,
+                    "size": 300000,
+                    "type": "image/jpeg"
+                  },
+                  {
+                    "name": "carbon_gallery_2.jpg",
+                    "lastModified": 1678886400000,
+                    "size": 450000,
+                    "type": "image/jpeg"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "create article response",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "message": "Article successfully created"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["articles"],
+        "description": "Get articles",
+        "operationId": "getArticle",
+        "requestBody": {
+          "description": "Filtered article in database",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Article"
+              },
+              "example": {
+                "is_active": true,
+                "highlighted": true
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "article response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Article Read"
+                },
+                "example": {
+                  "success": true,
+                  "message": "Article successfully fetched",
+                  "data": [{
+                    "title": "Tour Lebih Aman Dengan Helm Full Face Yang Tepat!",
+                    "subtitle": "5 Kriteria Utama yang Harus Dipertimbangkan Sebelum Membeli Helm untuk Perjalanan Jarak Jauh",
+                    "content": "{\ntime: 1753183777114,\nblocks: [\n{\nid: \"mhTl6ghSkV\",\ntype: \"paragraph\",\ndata: {\ntext: \"Hey. Meet the new Editor. On this picture you can see it in action. Then, try a demo 🤓\",\n} ,\n} \n] \n}\n",
+                    "category": "Tips Berkendara Aman",
+                    "is_active": true,
+                    "highlighted": true,
+                    "cover": {
+                      "name": "carbon_cover.jpg"
+                    },
+                    "images": [
+                      {
+                        "name": "carbon_gallery_1.jpg"
+                      },
+                      {
+                        "name": "carbon_gallery_2.jpg"
+                      }
+                    ]
+                  }]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "article not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "message": "article not found",
+                  "data": []
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "success": false,
+                  "message": "There's an error in server",
+                  "data": []
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/article/{name}": {
+      "patch": {
+        "tags": ["articles"],
+        "description": "Edit existing article and updating into the system",
+        "operationId": "createArticle",
+        "requestBody": {
+          "description": "Edited article",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Article"
+              },
+              "example": {
+                "title": "Tour Lebih Aman Dengan Helm Full Face Yang Tepat!",
+                "subtitle": "5 Kriteria Utama yang Harus Dipertimbangkan Sebelum Membeli Helm untuk Perjalanan Jarak Jauh",
+                "content": "{\ntime: 1753183777114,\nblocks: [\n{\nid: \"mhTl6ghSkV\",\ntype: \"paragraph\",\ndata: {\ntext: \"Hey. Meet the new Editor. On this picture you can see it in action. Then, try a demo 🤓\",\n} ,\n} \n] \n}\n",
+                "category": "Tips Berkendara Aman",
+                "is_active": true,
+                "highlighted": true,
+                "cover": {
+                  "name": "carbon_cover.jpg",
+                  "lastModified": 1678886400000,
+                  "size": 500000,
+                  "type": "image/jpeg"
+                },
+                "images": [
+                  {
+                    "name": "carbon_gallery_1.jpg",
+                    "lastModified": 1678886400000,
+                    "size": 300000,
+                    "type": "image/jpeg"
+                  },
+                  {
+                    "name": "carbon_gallery_2.jpg",
+                    "lastModified": 1678886400000,
+                    "size": 450000,
+                    "type": "image/jpeg"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "create article response",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "message": "Article successfully created"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["articles"],
+        "description": "Get article by name",
+        "operationId": "getArticle",
+        "responses": {
+          "200": {
+            "description": "article response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Article"
+                },
+                "example": {
+                  "success": true,
+                  "message": "Article successfully fetched",
+                  "data": {
+                    "name": "JS CARBON-X FULL FACE",
+                    "type": "Full Face",
+                    "cover": {
+                      "name": "carbon_cover.jpg"
+                    },
+                  "gallery": [
+                    {
+                      "name": "carbon_gallery_1.jpg"
+                    },
+                    {
+                      "name": "carbon_gallery_2.jpg"
+                    }
+                  ],
+                    "description": "Helm racing carbon fiber ultra-ringan (1.250g). Visor racing-grade dan sertifikasi FIM.",
+                    "color_variant": "Full Carbon",
+                    "size": "L",
+                    "shopee_link": "https://shopee.co.id/jscarbonx",
+                    "is_active": true,
+                    "highlighted": true
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "article not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "message": "article not found",
+                  "data": {}
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "success": false,
+                  "message": "There's an error in server",
+                  "data": {}
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["articles"],
+        "description": "Delete article by name",
+        "operationId": "deleteArticle",
+        "responses": {
+          "204": {
+            "description": "article response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Article"
+                },
+                "example": {
+                  "success": true,
+                  "message": "Article successfully deleted"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "article not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "message": "Article not found",
+                  "data": {}
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "success": false,
+                  "message": "There's an error in server",
+                  "data": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "required": ["name", "username", "password"],
+        "properties": {
+          "fullname": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "Product Read": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Product"
+          }
+        ],
+        "required": ["name", "type", "cover", "gallery", "description"],
+        "properties": {
+          "cover": {
+            "$ref": "#/components/schemas/File Static"
+          },
+          "gallery": {
+            "$ref": "#/components/schemas/File Static List"
+          }
+        }
+      },
+      "Product Write": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Product"
+          }
+        ],
+        "required": ["name", "type", "cover", "gallery", "description"],
+        "properties": {
+          "cover": {
+            "$ref": "#/components/schemas/File"
+          },
+          "gallery": {
+              "$ref": "#/components/schemas/FileList"
+          }
+        }
+      },
+      "Product": {
+        "type": "object",
+        "required": ["name", "type", "cover", "gallery", "description"],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "color_variant": {
+            "type": "string"
+          },
+          "size": {
+            "type": "string"
+          },
+          "shopee_link": {
+            "type": "string"
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "highlighted": {
+            "type": "boolean"
+          },
+          "cover": {
+            "$ref": "#/components/schemas/File"
+          },
+          "gallery": {
+              "$ref": "#/components/schemas/FileList"
+          }
+        }
+      },
+      "Article Read": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Article"
+          }
+        ],
+        "properties": {
+          "cover": {
+            "$ref": "#/components/schemas/File Static"
+          },
+          "images": {
+            "$ref": "#/components/schemas/File Static List"
+          }
+        }
+      },
+      "Article Write": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Article"
+          }
+        ],
+        "properties": {
+          "cover": {
+            "$ref": "#/components/schemas/File"
+          },
+          "images": {
+            "$ref": "#/components/schemas/FileList"
+          }
+        }
+      },
+      "Article": {
+        "type": "object",
+        "required": ["title", "subtitle", "content", "category", "cover"],
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "subtitle": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "highlighted": {
+            "type": "boolean"
+          }
+        }
+      },
+      "FileList": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/File"
+        }
+      },
+      "File": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "lastModified": {
+            "type": "number"
+          },
+          "size": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "File Static List": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/File Static"
+        }
+      },
+      "File Static": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": ["code", "message"],
+        "properties": {
+          "status": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
+
