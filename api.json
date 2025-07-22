@@ -243,7 +243,7 @@
         }
       }
     },
-    "/products/{name}": {
+    "/products/{type}/{name}": {
       "patch": {
         "tags": ["products"],
         "description": "Edit existing product and updating into the system",
@@ -587,7 +587,7 @@
         }
       }
     },
-    "/article/{title}": {
+    "/article/{category}/{title}": {
       "patch": {
         "tags": ["articles"],
         "description": "Edit existing article and updating into the system",
