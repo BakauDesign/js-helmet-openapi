@@ -253,11 +253,33 @@
         }
       }
     },
-    "/products/{type}/{name}": {
+    "/products?type=Full Face&name=Carbon X Pro": {
       "patch": {
         "tags": ["products"],
         "description": "Edit existing product and updating into the system",
         "operationId": "updateProduct",
+        "parameters": [
+          {
+            "name": "type",
+            "description": "Product type",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Full Face",
+              "nullable": false
+            }
+          },
+          {
+            "name": "name",
+            "description": "Product name",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Carbon X Pro",
+              "nullable": false
+            }
+          }
+        ],
         "requestBody": {
           "description": "Edited product",
           "required": true,
@@ -333,6 +355,28 @@
         "tags": ["products"],
         "description": "Get product by name",
         "operationId": "getProduct",
+        "parameters": [
+          {
+            "name": "type",
+            "description": "Product type",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Full Face",
+              "nullable": false
+            }
+          },
+          {
+            "name": "name",
+            "description": "Product name",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Carbon X Pro",
+              "nullable": false
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "product response",
@@ -402,6 +446,28 @@
         "tags": ["products"],
         "description": "Delete product by name",
         "operationId": "deleteProduct",
+        "parameters": [
+          {
+            "name": "type",
+            "description": "Product type",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Full Face",
+              "nullable": false
+            }
+          },
+          {
+            "name": "name",
+            "description": "Product name",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Carbon X Pro",
+              "nullable": false
+            }
+          }
+        ],
         "responses": {
           "204": {
             "description": "product response",
@@ -607,11 +673,33 @@
         }
       }
     },
-    "/article/{category}/{title}": {
+    "/articles?category=Event & Komunitas&title=Pesaran Bagaimana Keseruan Acara": {
       "patch": {
         "tags": ["articles"],
         "description": "Edit existing article and updating into the system",
         "operationId": "updateArticle",
+        "parameters": [
+          {
+            "name": "category",
+            "description": "Article category",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Event & Komunitas",
+              "nullable": false
+            }
+          },
+          {
+            "name": "title",
+            "description": "Article title",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Pesaran Bagaimana Keseruan Acara",
+              "nullable": false
+            }
+          }
+        ],
         "requestBody": {
           "description": "Edited article",
           "required": true,
@@ -679,6 +767,28 @@
         "tags": ["articles"],
         "description": "Get article by name",
         "operationId": "getArticle",
+        "parameters": [
+          {
+            "name": "category",
+            "description": "Article category",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Event & Komunitas",
+              "nullable": false
+            }
+          },
+          {
+            "name": "title",
+            "description": "Article title",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Pesaran Bagaimana Keseruan Acara",
+              "nullable": false
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "article response",
@@ -748,6 +858,28 @@
         "tags": ["articles"],
         "description": "Delete article by name",
         "operationId": "deleteArticle",
+        "parameters": [
+          {
+            "name": "category",
+            "description": "Article category",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Event & Komunitas",
+              "nullable": false
+            }
+          },
+          {
+            "name": "title",
+            "description": "Article title",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Pesaran Bagaimana Keseruan Acara",
+              "nullable": false
+            }
+          }
+        ],
         "responses": {
           "204": {
             "description": "article response",
