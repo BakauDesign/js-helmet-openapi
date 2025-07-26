@@ -149,25 +149,35 @@
             }
           }
         }
-      },
+      }
+    },
+    "/products?is_active=true&highlighted=true": {
       "get": {
         "tags": ["products"],
         "description": "Get products",
         "operationId": "getProduct",
-        "requestBody": {
-          "description": "Filtered product in database",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Product"
-              },
-              "example": {
-                "is_active": true,
-                "highlighted": true
-              }
+        "parameters": [
+          {
+            "name": "is_active",
+            "description": "Filtering active product",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "example": true,
+              "nullable": true
+            }
+          },
+          {
+            "name": "highlighted",
+            "description": "Filtering highlighted product",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "example": true,
+              "nullable": true
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "product response",
@@ -504,25 +514,35 @@
             }
           }
         }
-      },
+      }
+    },
+    "/articles?is_active=true&highlighted=true": {
       "get": {
         "tags": ["articles"],
         "description": "Get articles",
         "operationId": "getArticle",
-        "requestBody": {
-          "description": "Filtered article in database",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Article"
-              },
-              "example": {
-                "is_active": true,
-                "highlighted": true
-              }
+        "parameters": [
+          {
+            "name": "is_active",
+            "description": "Filtering active product",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "example": true,
+              "nullable": true
+            }
+          },
+          {
+            "name": "highlighted",
+            "description": "Filtering highlighted product",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "example": true,
+              "nullable": true
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "article response",
