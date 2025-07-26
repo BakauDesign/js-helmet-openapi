@@ -151,7 +151,7 @@
         }
       }
     },
-    "/products?is_active=true&highlighted=true": {
+    "/products?is_active=true&highlighted=true&type=Full Face": {
       "get": {
         "tags": ["products"],
         "description": "Get products",
@@ -175,6 +175,16 @@
               "type": "boolean",
               "example": true,
               "nullable": true
+            }
+          },
+          {
+            "name": "type",
+            "description": "Product type",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Full Face",
+              "nullable": false
             }
           }
         ],
