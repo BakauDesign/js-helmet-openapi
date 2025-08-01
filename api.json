@@ -151,6 +151,47 @@
         }
       }
     },
+    "/products/validate-name?type=Full Face&name=Carbon X Pro": {
+      "get": {
+        "tags": ["products"],
+        "description": "Check product name before creating it",
+        "operationId": "checkProductName",
+        "responses": {
+          "200": {
+            "description": "check product name response",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "message": "This product name valid"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "check product name response",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "message": "This product name already exist"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/products?is_active=true&highlighted=true&type=Full Face": {
       "get": {
         "tags": ["products"],
@@ -575,6 +616,104 @@
                 "example": {
                   "success": true,
                   "message": "Article successfully created"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/articles/upload-images": {
+      "post": {
+        "tags": ["articles"],
+        "description": "Upload all article content image",
+        "operationId": "uploadImage",
+        "requestBody": {
+          "description": "Uploaded image in storage",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FileList"
+              },
+              "example": {
+                "images": [
+                  {
+                    "name": "carbon_gallery_1.jpg",
+                    "lastModified": 1678886400000,
+                    "size": 300000,
+                    "type": "image/jpeg"
+                  },
+                  {
+                    "name": "carbon_gallery_2.jpg",
+                    "lastModified": 1678886400000,
+                    "size": 450000,
+                    "type": "image/jpeg"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "upload image response",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "message": "Image successfully uploaded"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/articles/validate-name?category=Event & Komunitas&title=Pesaran Bagaimana Keseruan Acara": {
+      "get": {
+        "tags": ["articles"],
+        "description": "Check article name before creating it",
+        "operationId": "checkArticleName",
+        "responses": {
+          "200": {
+            "description": "check article name response",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": true,
+                  "message": "This article name valid"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "check article name response",
+            "content": {
+              "application/json": {
+                "example": {
+                  "success": false,
+                  "message": "This article name already exist"
                 }
               }
             }
